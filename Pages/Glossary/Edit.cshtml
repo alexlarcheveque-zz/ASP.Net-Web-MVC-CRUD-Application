@@ -1,0 +1,40 @@
+﻿@page
+@model GlossaryApp.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Term</h1>
+
+<h4>Glossary</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Glossary.ID" />
+            <div class="form-group">
+                <label asp-for="Glossary.Term" class="control-label"></label>
+                <input asp-for="Glossary.Term" class="form-control" />
+                <span asp-validation-for="Glossary.Term" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Glossary.Definition" class="control-label"></label>
+                <textarea asp-for="Glossary.Definition" class="form-control"></textarea>
+                <span asp-validation-for="Glossary.Definition" class="text-danger" ></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

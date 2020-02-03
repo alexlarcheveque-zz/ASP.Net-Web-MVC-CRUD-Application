@@ -1,0 +1,59 @@
+﻿@page
+@model GlossaryApp.IndexModel
+
+@{
+    ViewData["Title"] = "Glossary Application";
+}
+
+<h1>Glossary</h1>
+
+<p>
+    <a asp-page="Create">
+    <i class="fas fa-plus-circle"></i>
+    Add New Term
+    </a>
+</p>
+
+    <div class="search-box">
+        <form asp-page="./Index" method="get">
+            Enter Glossary Term: 
+            <input type="text" name="searchString" value="@Model.SearchString" />
+            <input type="submit" value="Search" />
+        </form>
+    </div> 
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TermSort">
+                    @Html.DisplayNameFor(model => model.Glossary[0].Term)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DefinitionSort">
+                    @Html.DisplayNameFor(model => model.Glossary[0].Definition)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Glossary) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Definition)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
